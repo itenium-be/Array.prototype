@@ -1,9 +1,9 @@
 Array.prototype
 ===============
 
-Source code for blog post [Learning Array.prototype by C# Linq comparison](https://...)
+Source code for blog post [Learning Array.prototype by C# Linq comparison](https://itenium.be/blog/javascript/array-prototype)
 
-# Run JavaScript Jasmine tests
+## JavaScript tests
 
 ```
 npm install
@@ -14,3 +14,7 @@ npm test
 # Watch for changes
 npm run watch
 ```
+
+## .NET tests
+
+Run them in Visual Studio.
