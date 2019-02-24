@@ -7,6 +7,20 @@ namespace Array.prototype
 {
     public class BasicOperations
     {
+        // Comparison different C# UnitTesting frameworks: NUnit, XUnit, MSTest
+
+        [Fact]
+        public void Basic_example()
+        {
+            var result = new int?[] {0, 1, 2, 3, null}
+                .Where(x => x != null)
+                .Select(x => x * 10)
+                .OrderByDescending(x => x)
+                .ToArray();
+
+            Assert.Equal(new int?[] {30, 20, 10, 0}, result);
+        }
+
         [Fact]
         public void Select_is_map()
         {
@@ -14,6 +28,34 @@ namespace Array.prototype
             var result = input.Select(x => x * 2);
             Assert.Equal(new[] {0, 2, 4}, result);
         }
+
+        [Fact]
+        public void GroupBy_is_reduce()
+        {
+            var input = new[] { 0, 1, 2, 3 };
+            var result = input
+                .GroupBy(x => x % 2 == 0 ? "even" : "odd", x => x)
+                .ToArray();
+
+            Assert.Equal("even", result.First().Key);
+            Assert.Equal(new[] {0, 2}, result.First());
+        }
+
+        [Fact]
+        public void Aggregate_is_reduce()
+        {
+            var input = new[] { 0, 1, 2 };
+            var result = input.Aggregate(0, (sum, element) => sum + element);
+            // var result = input.Sum()
+            Assert.Equal(3, result);
+        }
+
+        //[Fact]
+        //public void SpanSlice_is_slice()
+        //{
+        //    // PMC: Install-Package System.Memory
+        //    var result = new[] { 0, 1, 2 }.AsSpan().Slice(0, 2);
+        //}
 
 
         [Fact]
@@ -93,6 +135,26 @@ namespace Array.prototype
             string result = string.Join(',', input);
             Assert.Equal("1,2,3", result);
         }
+
+        [Fact]
+        public void reverse_is_reverse()
+        {
+
+            // JS variant does it inplace though!
+            var input = new[] {1, 2, 3};
+            //input.Reverse()
+            var result = input.Reverse();
+            Assert.Equal(new[] { 3, 2, 1 }, result);
+        }
+
+        //[Fact]
+        //public void reverse_is_shift()
+        //{
+        //    // JS variant does it inplace though!
+        //    var input = new[] { 1, 2, 3 };
+        //    var result = input.
+        //    Assert.Equal(new[] { 3, 2, 1 }, result);
+        //}
     }
 
 
