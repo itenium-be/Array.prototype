@@ -1,6 +1,10 @@
 // Basic Example
 // (someVar || []).filter().map()
 
+// Examples of newer ECMAScript version features
+// toSorted, toSpliced, toReversed, with, ...
+// https://github.com/itenium-be/ModernJS/blob/master/src/ECMAScripts/ECMAScript2023.spec.ts
+
 it('basic example', function() {
   const result = [0, 1, 2, 3, null]
     .filter(x => x !== null)

@@ -7,8 +7,6 @@ namespace Array.prototype
 {
     public class BasicOperations
     {
-        // Comparison different C# UnitTesting frameworks: NUnit, XUnit, MSTest
-
         [Fact]
         public void Basic_example()
         {
@@ -27,6 +25,14 @@ namespace Array.prototype
             var input = new[] {0, 1, 2};
             var result = input.Select(x => x * 2);
             Assert.Equal(new[] {0, 2, 4}, result);
+        }
+
+        [Fact]
+        public void SelectMany_is_flat_or_flatMap()
+        {
+            var input = new[] { new[] {0}, new [] {1}, new[] { 2 , 3} };
+            var result = input.SelectMany(x => x);
+            Assert.Equal(new[] { 0, 1, 2, 3 }, result);
         }
 
         [Fact]
@@ -57,6 +63,20 @@ namespace Array.prototype
         //    var result = new[] { 0, 1, 2 }.AsSpan().Slice(0, 2);
         //}
 
+        [Fact]
+        public void ElementAt_is_at()
+        {
+            var input = new[] { 0, 1, 2 };
+            var result = input.ElementAt(1);
+            Assert.Equal(1, result);
+        }
+
+        [Fact]
+        public void ElementAt_must_be_positive_unlike_js_at()
+        {
+            var input = new[] { 0, 1, 2 };
+            Assert.Throws<ArgumentOutOfRangeException>(() => input.ElementAt(-2));
+        }
 
         [Fact]
         public void Concat_is_the_same()
