@@ -70,6 +70,24 @@ describe('Mapping', function() {
       }, []);
       expect(result).toEqual([1, 2]);
     });
+
+    it('since 2024, JS has Object.groupBy', () => {
+      const socks = [
+        { name: 'JavaScript', type: 'lang' },
+        { name: 'Angular', type: 'package' },
+        { name: 'React', type: 'package' },
+      ];
+
+      const grouped = Object.groupBy(socks, sock => sock.type);
+
+      expect(grouped).toEqual({
+        lang: [{ name: 'JavaScript', type: 'lang' }],
+        package: [
+          { name: 'Angular', type: 'package' },
+          { name: 'React', type: 'package' },
+        ]
+      })
+    })
   });
 
 
