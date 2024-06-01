@@ -17,4 +17,5 @@ npm run watch
 
 ## .NET tests
 
+Open `Array.prototype/Array.prototype.sln`  
 Run them in Visual Studio.

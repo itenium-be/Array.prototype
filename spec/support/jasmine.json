@@ -1,5 +1,5 @@
 {
-  "spec_dir": "Array.prototype",
+  "spec_dir": "javascript-tests",
   "spec_files": [
     "**/*.js"
   ],
