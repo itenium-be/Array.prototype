@@ -179,7 +179,16 @@ describe('Finding stuff', function() {
 describe('Looping', function() {
   it("C# doesn't have forEach((currentValue[, index[, array[, thisArg]]]) => {})", function() {
     // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach
-    // TODO: Add link to Stackoverflow question why forEach is not in Linq by default.
+
+    // There is a reason ForEach is not a default LINQ operator:
+    // I believe the idea is that the LINQ query operators should be side-effect-free,
+    // fitting in with a reasonably functional way of looking at the world. Clearly ForEach
+    // is exactly the opposite - a purely side-effect-based construct.
+    //
+    // That's not to say this is a bad thing to do - just thinking about the philosophical
+    // reasons behind the decision.
+    // -- Jon Skeet
+    // See: https://stackoverflow.com/a/200614/25184132
     const input = [0, 1, 2, 3];
     let sum = 0;
     input.forEach(nr => sum += nr);
