@@ -56,12 +56,32 @@ namespace Array.prototype
             Assert.Equal(3, result);
         }
 
-        //[Fact]
-        //public void SpanSlice_is_slice()
-        //{
-        //    // PMC: Install-Package System.Memory
-        //    var result = new[] { 0, 1, 2 }.AsSpan().Slice(0, 2);
-        //}
+        [Fact]
+        public void SpanSlice_is_slice()
+        {
+            // PMC: Install-Package System.Memory
+            var result = new[] { 0, 1, 2 }.AsSpan().Slice(0, 2);
+            Assert.Equal(new[] {0, 1}, result.ToArray());
+        }
+
+        [Fact]
+        public void Ranges_is_slice()
+        {
+            // See: https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/proposals/csharp-8.0/ranges
+            var array = new[] { 1, 2, 3, 4, 5 };
+
+            Assert.Equal(new[] { 3, 4 }, array[2..^1]);
+            Assert.Equal(new[] { 3, 4 }, array[new Range(2, new Index(1, fromEnd: true))]);
+
+            Assert.Equal(new[] { 1, 2 }, array[..^3]);
+            Assert.Equal(new[] { 1, 2 }, array[Range.EndAt(new Index(3, fromEnd: true))]);
+
+            Assert.Equal(new[] { 3, 4, 5 }, array[2..]);
+            Assert.Equal(new[] { 3, 4, 5 }, array[Range.StartAt(2)]);
+
+            Assert.Equal(new[] { 1, 2, 3, 4, 5 }, array[..]);
+            Assert.Equal(new[] { 1, 2, 3, 4, 5 }, array[Range.All]);
+        }
 
         [Fact]
         public void ElementAt_is_at()
