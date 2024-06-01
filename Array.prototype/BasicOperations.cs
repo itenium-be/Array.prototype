@@ -59,7 +59,7 @@ namespace Array.prototype
         [Fact]
         public void SpanSlice_is_slice()
         {
-            // PMC: Install-Package System.Memory
+            // PMC: Install-Package System.Memory (for older versions of .NET like 4.7)
             var result = new[] { 0, 1, 2 }.AsSpan().Slice(0, 2);
             Assert.Equal(new[] {0, 1}, result.ToArray());
         }
