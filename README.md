@@ -3,19 +3,21 @@ Array.prototype
 
 Source code for blog post [Learning Array.prototype by C# Linq comparison](https://itenium.be/blog/javascript/array-prototype)
 
-## JavaScript tests
+## TypeScript tests
 
 ```sh
-npm install
+bun install
 
 # Run once
-npm test
+bun test
 
 # Watch for changes
-npm run watch
+bun test --watch
 ```
 
 ## .NET tests
 
-Open `Array.prototype/Array.prototype.sln`  
-Run them in Visual Studio.
+```sh
+cd Array.prototype
+dotnet test
+```
