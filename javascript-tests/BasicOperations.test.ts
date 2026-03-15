@@ -151,6 +151,28 @@ describe('Finding stuff', function() {
   });
 
 
+  it('C# LastOrDefault() is JS findLast()', function() {
+    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/findLast
+    const input = [0, 1, 2, 3, 4, 5];
+    const lastLargerThan3 = input.findLast(x => x > 3);
+    expect(lastLargerThan3).toBe(5);
+
+    const largerThan5 = input.findLast(x => x > 5);
+    expect(largerThan5).toBeUndefined();
+  });
+
+
+  it('C# FindLastIndex() is JS findLastIndex()', function() {
+    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/findLastIndex
+    const input = [0, 1, 2, 3, 4, 5];
+    const lastLargerThan3 = input.findLastIndex(x => x > 3);
+    expect(lastLargerThan3).toBe(5);
+
+    const largerThan5 = input.findLastIndex(x => x > 5);
+    expect(largerThan5).toBe(-1);
+  });
+
+
   it('C# Contains() is JS includes(valueToFind[, fromIndex])', function() {
     // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/includes
     const input = [0, 1, 2];
@@ -287,12 +309,23 @@ it('C# Concat() is the same in JS', function() {
 
 
 describe('Mutation', function() {
-  it('C# Reverse() is JS reverse()', function() {
+  it('C# Reverse() is JS reverse() - but JS mutates!', function() {
     // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reverse
+    // Note: LINQ Reverse() returns a new sequence, JS reverse() mutates in place
     const input = [0, 1, 2];
     const reversed = input.reverse();
     expect(input).toBe(reversed);
     expect(input).toEqual([2, 1, 0]);
+  });
+
+  it('C# Reverse() is actually JS toReversed() (ES2023)', function() {
+    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/toReversed
+    // toReversed() matches LINQ behavior: returns new array, doesn't mutate original
+    const input = [0, 1, 2];
+    const reversed = input.toReversed();
+    expect(reversed).toEqual([2, 1, 0]);
+    expect(input).toEqual([0, 1, 2]); // original unchanged, like LINQ
+    expect(input).not.toBe(reversed);
   });
 
   it('shift() removes the first element', function() {
@@ -333,7 +366,10 @@ describe('Mutation', function() {
 
 
 
-  describe('C# OrderBy is JS sort()', function() {
+  describe('C# OrderBy is JS sort() - but JS mutates!', function() {
+    // Note: LINQ OrderBy() returns a new sequence, JS sort() mutates in place
+    // See toSorted() below for the ES2023 non-mutating alternative
+
     it('without comparer, it converts all elements to string and compares on UTF-16 code unit values', function() {
       // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
       const input = [8, 4, 3, 10, 5];
@@ -370,6 +406,21 @@ describe('Mutation', function() {
 
       const sorted = input.sort((a, b) => a.getTime() - b.getTime());
       expect(sorted).toEqual([date2, date3, date1]);
+    });
+  });
+
+
+  describe('C# OrderBy is actually JS toSorted() (ES2023)', function() {
+    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/toSorted
+    // toSorted() matches LINQ behavior: returns new array, doesn't mutate original
+
+    it('returns a new sorted array without mutating the original', function() {
+      const input = [8, 4, 3, 10, 5];
+      const sorted = input.toSorted((a, b) => a - b);
+
+      expect(sorted).toEqual([3, 4, 5, 8, 10]);
+      expect(input).toEqual([8, 4, 3, 10, 5]); // original unchanged, like LINQ
+      expect(input).not.toBe(sorted);
     });
   });
 });
