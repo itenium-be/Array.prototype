@@ -5,7 +5,7 @@ Source code for blog post [Learning Array.prototype by C# Linq comparison](https
 
 ## JavaScript tests
 
-```
+```sh
 npm install
 
 # Run once
