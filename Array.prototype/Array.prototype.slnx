@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path="../javascript-tests/BasicOperations.test.ts" />
+    <File Path="../javascript-tests/LessCommonOperations.test.ts" />
+    <File Path="../README.md" />
+  </Folder>
+  <Project Path="Array.prototype.csproj" />
+</Solution>
